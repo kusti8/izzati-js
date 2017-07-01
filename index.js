@@ -78,6 +78,7 @@ class Izzati {
                 try {
                     callback({text: resp.json()})
                 } catch (e) {
+                    console.log(resp.base64())
                     callback({base64: resp.base64()})
                 }
             }).catch((err) => {

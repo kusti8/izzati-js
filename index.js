@@ -1,4 +1,5 @@
 import RNFetchBlob from 'react-native-fetch-blob'
+import { PermissionsAndroid } from 'react-native'
 
 async function requestPermission() {
   try {

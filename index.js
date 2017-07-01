@@ -62,7 +62,8 @@ class Izzati {
                 b.push({name: 'file', filename: body.file.filename, data: RNFetchBlob.wrap(body.file.uri)})
             } else {
                 b.push({name: 'file', filename: body.file.filename, data: body.file.base64})
-            }``
+                console.log("file added")
+            }
             for (let key in body.text) {
                 b.push({name: key, data: body.text[key]})
             }

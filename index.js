@@ -91,6 +91,7 @@ class Izzati {
                 if (resp.headers['content-type'] == 'application/json') {
                     callback({json: resp.json()})
                 } else {
+                    console.log(resp.path())
                     callback({path: resp.path()})
                 }
             }).catch((err) => {

@@ -47,6 +47,7 @@ class Izzati {
 
     post(body) {
         let b = []
+        console.log(body)
         if (body.text === undefined) {
             if (body.file.base64 === undefined) {
                 b.push({name: 'file', filename: body.file.filename, data: RNFetchBlob.wrap(body.file.uri)})
@@ -62,7 +63,6 @@ class Izzati {
                 b.push({name: 'file', filename: body.file.filename, data: RNFetchBlob.wrap(body.file.uri)})
             } else {
                 b.push({name: 'file', filename: body.file.filename, data: body.file.base64})
-                console.log("file added")
             }
             for (let key in body.text) {
                 b.push({name: key, data: body.text[key]})

@@ -49,22 +49,22 @@ class Izzati {
         let b = []
         if (body.text === undefined) {
             if (body.file.base64 === undefined) {
-                b.append({name: 'file', filename: body.file.filename, data: RNFetchBlob.wrap(body.file.uri)})
+                b.push({name: 'file', filename: body.file.filename, data: RNFetchBlob.wrap(body.file.uri)})
             } else {
-                b.append({name: 'file', filename: body.file.filename, data: body.file.base64})
+                b.push({name: 'file', filename: body.file.filename, data: body.file.base64})
             }
         } else if (body.data === undefined) {
             for (let key in body.text) {
-                b.append({name: key, data: body.text[key]})
+                b.push({name: key, data: body.text[key]})
             }
         } else {
             if (body.file.base64 === undefined) {
-                b.append({name: 'file', filename: body.file.filename, data: RNFetchBlob.wrap(body.file.uri)})
+                b.push({name: 'file', filename: body.file.filename, data: RNFetchBlob.wrap(body.file.uri)})
             } else {
-                b.append({name: 'file', filename: body.file.filename, data: body.file.base64})
+                b.push({name: 'file', filename: body.file.filename, data: body.file.base64})
             }``
             for (let key in body.text) {
-                b.append({name: key, data: body.text[key]})
+                b.push({name: key, data: body.text[key]})
             }
         }
         if (body.response.base64 === true) {

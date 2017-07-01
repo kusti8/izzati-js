@@ -88,8 +88,9 @@ class Izzati {
             RNFetchBlob.config({fileCache: true,}).fetch('POST', this.url, {
                 'Content-Type' : 'multipart/form-data',
             }, b).then((resp) => {
+                console.log(resp)
                 try {
-                    callback({json: resp.json()})
+                    callback({text: resp.json()})
                 } catch (e) {
                     console.log(resp.path())
                     callback({path: resp.path()})

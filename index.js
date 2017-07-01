@@ -45,6 +45,10 @@ class Izzati {
         requestPermission();
     }
 
+    prefixJpg(base64) {
+        
+    }
+
     post(body) {
         let b = []
         if (body.text === undefined) {
@@ -74,8 +78,6 @@ class Izzati {
                 try {
                     return {text: resp.json()}
                 } catch (e) {
-                    console.log(resp)
-                    console.log(resp.base64())
                     return {base64: resp.base64()}
                 }
             }).catch((err) => {

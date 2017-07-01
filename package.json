@@ -1,0 +1,22 @@
+{
+  "name": "react-native-izzati",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "react-native",
+    "izzati",
+    "backend"
+  ],
+  "author": "Gustav Hansen <kusti8@gmail.com>",
+  "license": "",
+  "peerDependencies": {
+    "react-native": "^0.41.2"
+  },
+  "dependencies": {
+    "react-native-fetch-blob": "^0.10.6"
+  }
+}

@@ -71,11 +71,11 @@ class Izzati {
             RNFetchBlob.fetch('POST', this.url, {
                 'Content-Type' : 'multipart/form-data',
             }, b).then((resp) => {
-                console.log(resp.headers)
                 try {
                     return {text: resp.json()}
                 } catch (e) {
-                    console.log("base64")
+                    console.log(resp)
+                    console.log(resp.base64())
                     return {base64: resp.base64()}
                 }
             }).catch((err) => {

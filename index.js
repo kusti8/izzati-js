@@ -46,10 +46,10 @@ class Izzati {
     }
 
     prefixJpg(base64) {
-        
+
     }
 
-    post(body) {
+    post(body, callback) {
         let b = []
         if (body.text === undefined) {
             if (body.file.base64 === undefined) {
@@ -76,9 +76,9 @@ class Izzati {
                 'Content-Type' : 'multipart/form-data',
             }, b).then((resp) => {
                 try {
-                    return {text: resp.json()}
+                    callback({text: resp.json()})
                 } catch (e) {
-                    return {base64: resp.base64()}
+                    callback({base64: resp.base64()})
                 }
             }).catch((err) => {
                 return {err: err}

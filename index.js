@@ -81,25 +81,25 @@ class Izzati {
                     callback({base64: resp.base64()})
                 }
             }).catch((err) => {
-                return {err: err}
+                callback({err: err})
             })
         } else {
             RNFetchBlob.config({fileCache: true}).fetch('POST', this.url, {
                 'Content-Type' : 'multipart/form-data',
             }, b).then((resp) => {
                 if (resp.headers['content-type'] == 'application/json') {
-                    return {json: resp.json()}
+                    callback({json: resp.json()})
                 } else {
-                    return {path: resp.path()}
+                    callback({path: resp.path()})
                 }
             }).catch((err) => {
-                return {err: err}
+                callback({err: err})
             })
         }
     }
 
-    send(data) {
-        return this.post(data)
+    send(data, callback) {
+        this.post(data, callback)
     }
 }
 

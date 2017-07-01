@@ -72,9 +72,9 @@ class Izzati {
                 'Content-Type' : 'multipart/form-data',
             }, b).then((resp) => {
                 console.log(resp.headers)
-                if (resp.headers['content-type'] == 'application/json') {
+                try {
                     return {text: resp.json()}
-                } else {
+                } catch (e) {
                     console.log(resp.base64())
                     return {base64: resp.base64()}
                 }

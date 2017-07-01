@@ -75,9 +75,9 @@ class Izzati {
             RNFetchBlob.fetch('POST', this.url, {
                 'Content-Type' : 'multipart/form-data',
             }, b).then((resp) => {
-                try {
+                if (resp.respInfo.headers['Content-Type'] === 'application/json') {
                     callback({text: resp.json()})
-                } catch (e) {
+                } else {
                     console.log(resp.base64())
                     callback({base64: resp.base64()})
                 }
@@ -89,9 +89,9 @@ class Izzati {
                 'Content-Type' : 'multipart/form-data',
             }, b).then((resp) => {
                 console.log(resp)
-                try {
+                if (resp.respInfo.headers['Content-Type'] === 'application/json') {
                     callback({text: resp.json()})
-                } catch (e) {
+                } else {
                     console.log(resp.path())
                     callback({path: resp.path()})
                 }

@@ -1,6 +1,6 @@
 {
   "name": "react-native-izzati",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "backend"
   ],
   "author": "Gustav Hansen <kusti8@gmail.com>",
-  "license": "",
+  "license": "GPL-3.0",
   "peerDependencies": {
     "react-native": "^0.41.2"
   },

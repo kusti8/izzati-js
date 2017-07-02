@@ -1,5 +1,5 @@
 import RNFetchBlob from 'react-native-fetch-blob'
-import { PermissionsAndroid } from 'react-native'
+import { PermissionsAndroid, Platform } from 'react-native'
 
 async function requestPermission() {
   try {
@@ -7,7 +7,7 @@ async function requestPermission() {
       PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
       {
         'title': 'App Permission',
-        'message': 'Cool Photo App needs access to your files ' +
+        'message': 'This app needs access to your files ' +
                    'to interact with them.'
       }
     )
@@ -25,7 +25,7 @@ async function requestPermission() {
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
       {
         'title': 'App Permission',
-        'message': 'Cool Photo App needs access to your files ' +
+        'message': 'This app needs access to your files ' +
                    'to interact with them.'
       }
     )
@@ -46,7 +46,11 @@ class Izzati {
     }
 
     prefixJpg(base64) {
+        return 'data:image/jpeg;base64,' + base64
+    }
 
+    prefixPath(path) {
+        return Platform.OS === 'android' ? 'file://' + path  : '' + path
     }
 
     post(body, callback) {
@@ -87,11 +91,9 @@ class Izzati {
             RNFetchBlob.config({fileCache: true}).fetch('POST', this.url, {
                 'Content-Type' : 'multipart/form-data',
             }, b).then((resp) => {
-                console.log(resp)
                 if (resp.respInfo.headers['Content-Type'] === 'application/json') {
                     callback({text: resp.json()})
                 } else {
-                    console.log(resp.path())
                     callback({path: resp.path()})
                 }
             }).catch((err) => {

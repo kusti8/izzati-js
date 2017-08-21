@@ -53,7 +53,7 @@ class Izzati {
         return Platform.OS === 'android' ? 'file://' + path  : '' + path
     }
 
-    post(body, callback) {
+    post(body) {
         let b = []
         if (body.text === undefined) {
             if (body.file.base64 === undefined) {
@@ -76,34 +76,39 @@ class Izzati {
             }
         }
         if (body.response.base64 === true) {
-            RNFetchBlob.fetch('POST', this.url, {
-                'Content-Type' : 'multipart/form-data',
-            }, b).then((resp) => {
-                if (resp.respInfo.headers['Content-Type'] === 'application/json') {
-                    callback({text: resp.json()})
-                } else {
-                    callback({base64: resp.base64()})
-                }
-            }).catch((err) => {
-                callback({err: err})
+
+            return new Promise( (resolve, reject) => {
+                RNFetchBlob.fetch('POST', this.url, {
+                    'Content-Type' : 'multipart/form-data',
+                }, b).then((resp) => {
+                    if (resp.respInfo.headers['Content-Type'] === 'application/json') {
+                        resolve({text: resp.json()})
+                    } else {
+                        resolve({base64: resp.base64()})
+                    }
+                }).catch((err) => {
+                    reject({err: err})
+                })
             })
         } else {
-            RNFetchBlob.config({fileCache: true}).fetch('POST', this.url, {
-                'Content-Type' : 'multipart/form-data',
-            }, b).then((resp) => {
-                if (resp.respInfo.headers['Content-Type'] === 'application/json') {
-                    callback({text: resp.json()})
-                } else {
-                    callback({path: resp.path()})
-                }
-            }).catch((err) => {
-                callback({err: err})
+            return new Promise( (resolve, reject) => {
+                RNFetchBlob.config({fileCache: true}).fetch('POST', this.url, {
+                    'Content-Type' : 'multipart/form-data',
+                }, b).then((resp) => {
+                    if (resp.respInfo.headers['Content-Type'] === 'application/json') {
+                        resolve({text: resp.json()})
+                    } else {
+                        resolve({path: resp.path()})
+                    }
+                }).catch((err) => {
+                    reject({err: err})
+                })
             })
         }
     }
 
-    send(data, callback) {
-        this.post(data, callback)
+    send(data) {
+        this.post(data)
     }
 }
 

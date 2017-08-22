@@ -53,7 +53,7 @@ class Izzati {
         return Platform.OS === 'android' ? 'file://' + path  : '' + path
     }
 
-    post(body) {
+    send(body) {
         let b = []
         if (body.text === undefined) {
             if (body.file.base64 === undefined) {
@@ -74,6 +74,15 @@ class Izzati {
             for (let key in body.text) {
                 b.push({name: key, data: body.text[key]})
             }
+        }
+        if ('response' in body) {
+            if ('base64' in body.response) {
+
+            } else {
+                body.response.base64 = true
+            }
+        } else {
+            body.response = {base64: true}
         }
         if (body.response.base64 === true) {
 
@@ -105,10 +114,6 @@ class Izzati {
                 })
             })
         }
-    }
-
-    send(data) {
-        this.post(data)
     }
 }
 
